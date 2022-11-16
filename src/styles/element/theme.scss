@@ -1,0 +1,33 @@
+$namespace: v;
+
+// elementplus样式命名空间
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: $namespace
+);
+
+// elementplus主题
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #1890ff,
+    ),
+    'success': (
+      'base': #55D187,
+    ),
+    'warning': (
+      'base': #EFBD47,
+    ),
+    'danger': (
+      'base': #ED6F6F,
+    ),
+    'error': (
+      'base': #ED6F6F,
+    ),
+    'info': (
+      'base': #909399,
+    ),
+  ),
+  $button: (
+    'font-weight': 600
+  ),
+);

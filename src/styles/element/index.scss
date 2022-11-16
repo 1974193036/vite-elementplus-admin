@@ -1,0 +1,61 @@
+// 这里写样式覆盖elementplus的默认样式
+
+$prefix-cls: '#{$namespace}';
+
+// ElMessageBox 自定义样式
+.custom-message-box {
+  padding: 8px;
+  // vertical-align: inherit !important;
+  border-radius: 2px !important;
+
+  .#{$prefix-cls}-message-box__header {
+    padding-top: 20px;
+  }
+
+  .#{$prefix-cls}-message-box__title {
+    justify-content: start !important;
+    span {
+      margin-left: 8px;
+    }
+    .#{$prefix-cls}-icon {
+      width: 30px;
+    }
+  }
+
+  .#{$prefix-cls}-message-box__content {
+    text-align: left !important;
+    padding: 0px 30px 16px 55px !important;
+  }
+
+  .#{$prefix-cls}-message-box__btns {
+    justify-content: flex-end !important;
+  }
+
+  .#{$prefix-cls}-button {
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 4px 15px;
+    font-weight: 400;
+
+    &--primary {
+      &:focus {
+        background-color: var(--#{$namespace}-color-primary);
+        border-color: var(--#{$namespace}-color-primary);
+      }
+    }
+  }
+
+  .#{$prefix-cls}-button.is-plain {
+    background: var(--#{$namespace}-color-primary);
+    border-color: var(--#{$namespace}-color-primary);
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .#{$prefix-cls}-message-box__btns {
+    padding: 10px 15px 12px 15px;
+  }
+}
