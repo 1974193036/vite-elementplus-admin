@@ -125,22 +125,22 @@ export const setComponentProps = (item: FormSchema): Recordable => {
     componentProps = {
       clearable: false,
       editable: false,
-      valueFormat: 'YYYY-MM-DD',
-      disabledDate: (time: Date) => {
-        if (!pickDay.value) {
-          return time.getTime() > Date.now()
-        }
-        const timeRange = 24 * 60 * 60 * 1000
-        const con1 = new Date(pickDay.value).getTime() - 3 * timeRange
-        const con2 = new Date(pickDay.value).getTime() + 3 * timeRange
-        return time.getTime() < con1 || time.getTime() > con2 || time.getTime() > Date.now()
-      },
-      onCalendarChange: (date: Date[]) => {
-        pickDay.value = date[0]
-      },
-      onVisibleChange: () => {
-        pickDay.value = null
-      },
+      // valueFormat: 'YYYY-MM-DD',
+      // disabledDate: (time: Date) => {
+      //   if (!pickDay.value) {
+      //     return time.getTime() > Date.now()
+      //   }
+      //   const timeRange = 24 * 60 * 60 * 1000
+      //   const con1 = new Date(pickDay.value).getTime() - 3 * timeRange
+      //   const con2 = new Date(pickDay.value).getTime() + 3 * timeRange
+      //   return time.getTime() < con1 || time.getTime() > con2 || time.getTime() > Date.now()
+      // },
+      // onCalendarChange: (date: Date[]) => {
+      //   pickDay.value = date[0]
+      // },
+      // onVisibleChange: () => {
+      //   pickDay.value = null
+      // },
       ...item.componentProps
     }
   } else {

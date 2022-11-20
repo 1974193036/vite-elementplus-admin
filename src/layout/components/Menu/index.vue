@@ -98,10 +98,6 @@ export default defineComponent({
       }
     }
 
-    const addRtest = () => {
-      permissionStore.generateRoutes('none')
-    }
-
     return () => (
       <div
         id={prefixCls}
@@ -115,9 +111,6 @@ export default defineComponent({
         ]}
       >
         {renderMenuWrap()}
-        <button class="bg-red-400 absolute bottom-0 right-0" onClick={addRtest}>
-          点击生成路由
-        </button>
       </div>
     )
   }

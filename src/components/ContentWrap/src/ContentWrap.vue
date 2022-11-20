@@ -28,7 +28,12 @@ defineProps({
       <div
         class="pt-12px text-black text-opacity-65 text-size-14px leading-normal overflow-hidden break-all dark:text-white"
       >
-        {{ message }}
+        <template v-if="$slots.message">
+          <slot name="message"></slot>
+        </template>
+        <template v-else>
+          {{ message }}
+        </template>
       </div>
     </div>
     <div class="mt-[var(--app-content-padding)]">

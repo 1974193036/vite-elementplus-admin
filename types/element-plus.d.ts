@@ -49,6 +49,9 @@ declare type ComponentName =
   | 'Rate'
   | 'Divider'
   | 'InputPassword'
+  | 'Transfer'
+  | 'Slider'
+  | 'TimeSelect'
 
 // 有点搞不明白在tsx中写的组件无法通过`unplugin-auto-import`生成声明文件
 // 临时解决方案：手动加声明
