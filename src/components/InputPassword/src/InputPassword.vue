@@ -76,6 +76,7 @@ export default {
 $prefix-cls: '#{$namespace}-input-password'; // v-input-password
 
 .#{$prefix-cls} {
+  width: 100%;
   :deep(.#{$namespace}-input__clear) {
     margin-left: 8px;
   }

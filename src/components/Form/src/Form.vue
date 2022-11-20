@@ -109,6 +109,10 @@ export default defineComponent({
     // 表单数据
     const formModel = ref<Recordable>({})
 
+    onMounted(() => {
+      emit('register', unref(elFormRef)?.$parent, unref(elFormRef))
+    })
+
     expose({
       setProps,
       setValues,
@@ -131,10 +135,6 @@ export default defineComponent({
         deep: true
       }
     )
-
-    onMounted(() => {
-      emit('register', unref(elFormRef)?.$parent, unref(elFormRef))
-    })
 
     // 渲染包裹标签，是否使用栅格布局
     const renderWrap = () => {

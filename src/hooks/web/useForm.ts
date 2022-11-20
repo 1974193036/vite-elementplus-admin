@@ -80,7 +80,11 @@ export const useForm = (props?: FormProps) => {
     }
   }
 
-  props && methods.setProps(props)
+  ;(async () => {
+    await nextTick()
+    props && methods.setProps(props)
+  })()
+
 
   return {
     register,
