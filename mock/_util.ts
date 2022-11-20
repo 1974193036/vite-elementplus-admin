@@ -9,6 +9,15 @@ export function resultError(message = '请求失败') {
   }
 }
 
+export function resultTimeout(message = '请求失败') {
+  return {
+    code: ResultEnum.TIMEOUT,
+    message,
+    result: {},
+    type: 'error'
+  }
+}
+
 export function resultSuccess<T = Recordable>(result: T, message = 'ok') {
   return {
     code: ResultEnum.SUCCESS,

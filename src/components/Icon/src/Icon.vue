@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 推荐使用Iconify组件
+ * https://icon-sets.iconify.design/
+ */
 import { propTypes } from '@/utils/propTypes'
 import Iconify from '@purge-icons/generated'
 import { useDesign } from '@/hooks/web/useDesign'

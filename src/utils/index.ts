@@ -54,6 +54,17 @@ export const humpToUnderline = (str: string): string => {
 }
 
 /**
+ * @param str 需要转驼峰的下划线字符串
+ * @returns 字符串驼峰
+ */
+export const underlineToHump = (str: string): string => {
+  if (!str) return ''
+  return str.replace(/\_(\w)/g, (_, letter: string) => {
+    return letter.toUpperCase()
+  })
+}
+
+/**
  * 查找数组对象的某个下标
  * @param {Array} ary 查找的数组
  * @param {Functon} fn 判断的方法

@@ -6,6 +6,7 @@ import { loginOutApi } from '@/api/login'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useMessage } from '@/hooks/web/useMessage'
 import { useTagsViewStore } from '@/store/modules/tagsView'
+import { useUserStore } from '@/store/modules/user'
 
 const tagsViewStore = useTagsViewStore()
 
@@ -18,6 +19,12 @@ const { wsCache } = useCache()
 const { replace } = useRouter()
 
 const { createConfirm } = useMessage()
+
+const userStore = useUserStore()
+
+const userInfo = computed(() => {
+  return userStore.getUserInfo
+})
 
 const loginOut = () => {
   createConfirm({
@@ -42,12 +49,12 @@ const toDocument = () => {
   <ElDropdown :class="prefixCls" trigger="hover">
     <div class="flex items-center">
       <img
-        src="@/assets/imgs/avatar.jpg"
+        :src="userInfo.avatar"
         alt=""
         class="w-[calc(var(--logo-height)-25px)] rounded-[50%]"
       />
       <span class="<lg:hidden text-[14px] pl-[5px] text-[var(--top-header-text-color)]"
-        >Archer</span
+        >{{ userInfo.realName }}</span
       >
     </div>
     <template #dropdown>

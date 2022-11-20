@@ -6,8 +6,14 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { VAxios } from './Axios'
 import { checkStatus } from './checkStatus'
 import { useMessage } from '@/hooks/web/useMessage'
+import { useCache } from '@/hooks/web/useCache'
+import { useAppStore } from '@/store/modules/app'
 
 const { createMessage, createErrorModal } = useMessage()
+
+const { wsCache } = useCache()
+
+const appStore = useAppStore()
 
 const transform: AxiosTransform = {
   /**
@@ -49,8 +55,7 @@ const transform: AxiosTransform = {
    * @description: 请求拦截器
    */
   requestInterceptors(config) {
-    // todo: 封装getToken方法
-    const token = 'fakeToken1'
+    const token = wsCache.get(appStore.getUserInfo)
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       ;(config as Recordable).headers.Authorization = token
     }
@@ -139,7 +144,6 @@ const transform: AxiosTransform = {
     switch (code) {
       case ResultEnum.TIMEOUT:
         timeoutMsg = '登录超时,请重新登录!'
-        // todo: 执行登出逻辑
         break
       default:
         if (message) {

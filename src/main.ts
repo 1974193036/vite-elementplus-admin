@@ -3,9 +3,6 @@ import 'virtual:windi-components.css'
 import '@/styles/index.scss'
 import 'virtual:windi-utilities.css'
 
-import 'virtual:svg-icons-register'
-
-
 import { createApp } from 'vue'
 
 // 引入状态管理
@@ -15,7 +12,8 @@ import { setupStore } from '@/store'
 import { setupElementPlus } from '@/plugins/elementPlus'
 
 // 路由
-import { setupRouter } from './router'
+import router, { setupRouter } from './router'
+import { setupRouterGuard } from './router/guard'
 
 import App from './App.vue'
 
@@ -27,6 +25,8 @@ function bootstrap() {
   setupElementPlus(app)
 
   setupRouter(app)
+
+  setupRouterGuard(router)
 
   app.mount('#app')
 }

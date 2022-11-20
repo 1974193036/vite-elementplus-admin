@@ -33,18 +33,23 @@ export const usePermissionStore = defineStore('permission', {
     }
   },
   actions: {
-    generateRoutes(
-      type: 'admin' | 'test' | 'none',
-      routers?: AppCustomRouteRecordRaw[] | string[]
-    ): Promise<unknown> {
+    generateRoutes({
+      type,
+      roles = [],
+      routers = []
+    }: {
+      type: 'frontend' | 'backend' | 'none'
+      roles?: any[]
+      routers?: AppCustomRouteRecordRaw[]
+    }): Promise<unknown> {
       return new Promise<void>((resolve) => {
         let routerMap: AppRouteRecordRaw[] = []
-        if (type === 'admin') {
-          // 模拟后端过滤菜单
-          // routerMap = generateRoutesFn2(routers as AppCustomRouteRecordRaw[])
-        } else if (type === 'test') {
+        if (type === 'frontend') {
           // 模拟前端过滤菜单
-          // routerMap = generateRoutesFn1(cloneDeep(asyncRoutes), routers as string[])
+          routerMap = generateRoutesFn1(asyncRoutes as AppRouteRecordRaw[], roles)
+        } else if (type === 'backend') {
+          // 模拟后端过滤菜单
+          routerMap = generateRoutesFn2(routers as AppCustomRouteRecordRaw[])
         } else {
           // 直接读取静态路由表
           routerMap = cloneDeep(asyncRoutes)

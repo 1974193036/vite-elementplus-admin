@@ -9,7 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite' // 自动导入vue全局api
 import Components from 'unplugin-vue-components/vite' // 自动导入组件
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { configMockPlugin } from './mock' // mock
-import { configIconConfig, configSpriteConfig } from './icon'
+import { configIconConfig } from './icon'
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_LEGACY, VITE_USE_MOCK } = viteEnv
@@ -30,7 +30,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // icon
   vitePlugins.push(configIconConfig())
-  vitePlugins.push(configSpriteConfig())
 
   vitePlugins.push(
     AutoImport({
@@ -70,28 +69,28 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     VITE_LEGACY &&
       vitePlugins.push(
         legacy({
-          targets: ['chrome 52'],
+          targets: ['chrome 65', 'firefox 63'],
           additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-          renderLegacyChunks: true,
-          polyfills: [
-            'es.symbol',
-            'es.array.filter',
-            'es.promise',
-            'es.promise.finally',
-            'es/map',
-            'es/set',
-            'es.array.for-each',
-            'es.object.define-properties',
-            'es.object.define-property',
-            'es.object.get-own-property-descriptor',
-            'es.object.get-own-property-descriptors',
-            'es.object.keys',
-            'es.object.to-string',
-            'web.dom-collections.for-each',
-            'esnext.global-this',
-            'esnext.string.match-all'
-          ],
-          modernPolyfills: true
+          // 显示指定polyfills
+          // polyfills: [
+          //   'es.symbol',
+          //   'es.array.filter',
+          //   'es.promise',
+          //   'es.promise.finally',
+          //   'es/map',
+          //   'es/set',
+          //   'es.array.for-each',
+          //   'es.object.define-properties',
+          //   'es.object.define-property',
+          //   'es.object.get-own-property-descriptor',
+          //   'es.object.get-own-property-descriptors',
+          //   'es.object.keys',
+          //   'es.object.to-string',
+          //   'web.dom-collections.for-each',
+          //   'esnext.global-this',
+          //   'esnext.string.match-all'
+          // ],
+          modernPolyfills: false
         })
       )
 

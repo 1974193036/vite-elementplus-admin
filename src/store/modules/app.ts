@@ -5,6 +5,8 @@ import { useMessage } from '@/hooks/web/useMessage'
 import { store } from '../index'
 import { setCssVar, humpToUnderline } from '@/utils'
 
+type routerType = 'frontend' | 'backend' | 'none'
+
 interface AppState {
   userInfo: string
   breadcrumb: boolean
@@ -19,7 +21,7 @@ interface AppState {
   logo: boolean
   fixedHeader: boolean
   greyMode: boolean
-  dynamicRouter: boolean
+  dynamicRouter: routerType
   pageLoading: boolean
   layout: LayoutType
   title: string
@@ -42,7 +44,7 @@ const { createMessage } = useMessage()
 export const useAppStore = defineStore('app', {
   state: (): AppState => {
     return {
-      userInfo: 'userInfo', // 登录信息存储字段-建议每个项目换一个字段，避免与其他项目冲突
+      userInfo: '__token__', // 登录信息存储字段-建议每个项目换一个字段，避免与其他项目冲突
       breadcrumb: true, // 面包屑
       breadcrumbIcon: true, // 面包屑图标
       collapse: false, // 折叠菜单
@@ -55,7 +57,7 @@ export const useAppStore = defineStore('app', {
       logo: true, // logo
       fixedHeader: true, // 固定toolheader
       greyMode: false, // 是否开始灰色模式，用于特殊悼念日
-      dynamicRouter: wsCache.get('dynamicRouter') || false, // 是否动态路由
+      dynamicRouter: wsCache.get('dynamicRouter') || 'frontend', // 是否动态路由
       pageLoading: false, // 路由跳转loading
       layout: wsCache.get('layout') || 'classic', // layout布局
       title: import.meta.env.VITE_GLOB_APP_TITLE, // 标题
@@ -138,7 +140,7 @@ export const useAppStore = defineStore('app', {
     getGreyMode(): boolean {
       return this.greyMode
     },
-    getDynamicRouter(): boolean {
+    getDynamicRouter(): routerType {
       return this.dynamicRouter
     },
     getPageLoading(): boolean {
@@ -209,9 +211,9 @@ export const useAppStore = defineStore('app', {
     setGreyMode(greyMode: boolean) {
       this.greyMode = greyMode
     },
-    setDynamicRouter(dynamicRouter: boolean) {
+    setDynamicRouter(dynamicRouter: string) {
       wsCache.set('dynamicRouter', dynamicRouter)
-      this.dynamicRouter = dynamicRouter
+      this.dynamicRouter = dynamicRouter as routerType
     },
     setPageLoading(pageLoading: boolean) {
       this.pageLoading = pageLoading

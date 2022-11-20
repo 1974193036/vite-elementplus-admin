@@ -10,7 +10,8 @@ const hooks: AppRouteRecordRaw[] = [
     meta: {
       title: 'hooks',
       icon: 'ic:outline-webhook',
-      alwaysShow: true
+      alwaysShow: true,
+      roles: ['admin']
     },
     children: [
       {

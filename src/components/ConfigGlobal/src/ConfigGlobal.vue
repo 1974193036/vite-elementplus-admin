@@ -4,6 +4,7 @@ import { useAppStoreWithOut } from '@/store/modules/app'
 import { useDesign } from '@/hooks/web/useDesign'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { setCssVar } from '@/utils'
+// import { propTypes } from '@/utils/propTypes'
 
 // 配置命名空间
 const { namespace } = useDesign()
@@ -13,9 +14,9 @@ const appStore = useAppStoreWithOut()
 const currentSize = computed(() => appStore.getCurrentSize)
 
 // 提供给全局
-// provide('configGlobal', {
-//   size: currentSize
-// })
+provide('configGlobal', ref({
+  size: currentSize
+}))
 
 // 初始化所有主题色
 onMounted(() => {
@@ -47,7 +48,7 @@ watch(
 <template>
   <ElConfigProvider
     :namespace="namespace"
-    :message="{ max: 3 }"
+    :message="{ max: 4 }"
     :size="currentSize"
     :locale="zhCn"
   >

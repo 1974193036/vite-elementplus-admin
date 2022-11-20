@@ -1,8 +1,9 @@
-// 这里写样式覆盖elementplus的默认样式
+/* 这里写样式覆盖elementplus的默认样式 */
 
 $prefix-cls: '#{$namespace}';
 
-// ElMessageBox 自定义样式
+
+/* ElMessageBox 自定义样式 */
 .custom-message-box {
   padding: 8px;
   // vertical-align: inherit !important;
@@ -57,5 +58,12 @@ $prefix-cls: '#{$namespace}';
 
   .#{$prefix-cls}-message-box__btns {
     padding: 10px 15px 12px 15px;
+  }
+}
+
+
+.#{$prefix-cls}-date-editor {
+  .#{$prefix-cls}-input__wrapper {
+    width: 100%;
   }
 }

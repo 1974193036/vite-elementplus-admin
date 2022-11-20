@@ -1,62 +1,98 @@
+<script lang="ts" setup>
+import { useDesign } from '@/hooks/web/useDesign'
+import { underlineToHump } from '@/utils'
+import { LoginForm, RegisterForm } from './components'
+
+const { getPrefixCls } = useDesign()
+
+const prefixCls = getPrefixCls('login') // v-login
+
+const title = underlineToHump(import.meta.env.VITE_GLOB_APP_SHORT_NAME)
+
+const isLogin = ref(true)
+
+const toRegister = () => {
+  isLogin.value = false
+}
+
+const toLogin = () => {
+  isLogin.value = true
+}
+</script>
+
 <template>
-  <div>
-    <div>login/index.vue</div>
-    <!-- <Icon icon="ep:aim" color="red" class="aaa" />
-    <Icon icon="ep:plus" color="red" :size="24" /> -->
-
-    <!-- <Icon :icon="iconx" color="red" :size="24" />
-
-    <Icon icon="ant-design:aim-outlined" color="red" :size="24" />
-    <Icon icon="ant-design:account-book-filled" color="red" :size="24" />
-    <Icon icon="ant-design:aliwangwang-outlined" color="red" :size="24" />
-    <Icon icon="ant-design:amazon-circle-filled" color="red" :size="24" />
-    <Icon icon="ant-design:appstore-twotone" color="red" :size="24" />
-    <Icon icon="ant-design:arrow-up-outlined" color="red" :size="24" />
-    <Icon icon="ant-design:audio-filled" color="red" :size="24" />
-
-
-    <Icon icon="svg-icon:peoples" color="red" :size="32" /> -->
-
-    <!-- <ElButton @click="changeIcon">11</ElButton> -->
-
-    <el-scrollbar>
-      <div>
-        <div v-for="i of count" :ref="refs.set">
-          <!-- <router-link :ref="refs.set" class="mr-2" :to="'/a/' + i" custom v-slot="{ navigate }">
-            <div @click="navigate">{{ i }}</div>
-          </router-link> -->
+  <div :class="prefixCls" class="h-[100%] relative <xl:(bg-v-dark-l px-10px) <sm:px-10px">
+    <div class="relative h-full flex mx-auto">
+      <div
+        :class="`${prefixCls}__left flex-1 bg-gray-500 bg-opacity-20 relative p-30px <xl:hidden`"
+      >
+        <div class="flex items-center relative text-white">
+          <img src="@/assets/imgs/logo.png" alt="" class="w-48px h-48px mr-10px" />
+          <span class="text-20px font-bold">{{ title }}</span>
+        </div>
+        <div class="flex justify-center items-center h-[calc(100%-60px)]">
+          <TransitionGroup
+            tag="div"
+            appear
+            enter-active-class="animate__animated animate__bounceInLeft"
+          >
+            <img src="@/assets/svgs/login-box-bg.svg" key="1" alt="" class="w-350px" />
+            <div class="text-3xl text-white text-center" key="2">欢迎使用本系统</div>
+            <div class="mt-5 font-normal text-white text-14px text-center" key="3">
+              开箱即用的中后台管理
+            </div>
+          </TransitionGroup>
         </div>
       </div>
-    </el-scrollbar>
-    <br />
-    <button @click="count += 1">Inc</button>
-    <button @click="ttt">Dec</button>
-    <note>Open the console to see the output</note>
+      <div class="flex-1 p-30px <sm:p-10px dark:bg-v-dark-l relative">
+        <div class="flex justify-between items-center text-white @2xl:justify-end @xl:justify-end">
+          <div class="flex items-center @2xl:hidden @xl:hidden">
+            <img src="@/assets/imgs/logo.png" alt="" class="w-48px h-48px mr-10px" />
+            <span class="text-20px font-bold">{{ title }}</span>
+          </div>
+          <div class="flex justify-end items-center space-x-10px">
+            <ThemeSwitch />
+          </div>
+        </div>
+
+        <Transition appear enter-active-class="animate__animated animate__bounceInRight">
+          <div
+            class="h-full w-full flex items-center m-auto @2xl:max-w-500px @xl:max-w-500px @md:max-w-500px @lg:max-w-500px"
+          >
+            <LoginForm
+              v-if="isLogin"
+              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white)"
+              @to-register="toRegister"
+            />
+            <RegisterForm
+              v-else
+              class="p-20px h-auto m-auto <xl:(rounded-3xl light:bg-white)"
+              @to-login="toLogin"
+            />
+          </div>
+        </Transition>
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-// const iconx = ref('ep:aim')
-// const changeIcon = () => {
-//   iconx.value = 'ant-design:aliwangwang-outlined'
-// }
+<style lang="scss" scoped>
+$prefix-cls: '#{$namespace}-login'; // v-login
 
-import { nextTick, ref, watch } from 'vue'
-import { useTemplateRefsList } from '@vueuse/core'
-const count = ref(2)
-const refs = useTemplateRefsList<HTMLDivElement>()
-watch(
-  refs,
-  async () => {
-    await nextTick()
-    console.log(refs.value)
-  },
-  {
-    deep: true,
-    flush: 'post'
+.#{$prefix-cls} {
+  &__left {
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-image: url('@/assets/svgs/login-bg.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      content: '';
+    }
   }
-)
-const ttt = () => {
-  console.log(refs.value)
 }
-</script>
+</style>

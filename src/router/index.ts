@@ -18,13 +18,10 @@ Object.keys(modules).forEach((key) => {
 // @ts-ignore
 asyncRoutes.sort((a, b) => a.orderNo - b.orderNo)
 
-console.log(asyncRoutes)
-
-
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
   strict: true,
-  routes: [...basicRoutes, ...asyncRoutes] as RouteRecordRaw[],
+  routes: basicRoutes as RouteRecordRaw[],
   scrollBehavior(to, _from, savedPosition) {
     // keep-alive 返回缓存页面后记录浏览位置
     if (savedPosition && !to.meta.noCache) {

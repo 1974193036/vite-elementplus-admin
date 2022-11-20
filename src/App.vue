@@ -142,22 +142,4 @@ $prefix-cls: '#{$namespace}-app'; // v-app
 .#{$prefix-cls}-grey-mode {
   filter: grayscale(100%);
 }
-
-@mixin size {
-  width: 100%;
-  height: 100%;
-}
-
-html,
-body {
-  padding: 0 !important;
-  margin: 0;
-  overflow: hidden;
-  @include size;
-
-  #app,
-  .app-inner {
-    @include size;
-  }
-}
 </style>

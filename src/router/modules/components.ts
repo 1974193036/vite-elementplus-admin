@@ -1,4 +1,4 @@
-import { Layout } from '../routerHelper'
+import { Layout, getParentLayout } from '../routerHelper'
 
 const components: AppRouteRecordRaw[] = [
   {
@@ -10,12 +10,13 @@ const components: AppRouteRecordRaw[] = [
     meta: {
       title: '组件demo',
       icon: 'bx:bxs-component',
-      alwaysShow: true
+      alwaysShow: true,
+      roles: ['admin']
     },
     children: [
       {
         path: 'form',
-        //component: getParentLayout(),
+        component: getParentLayout(),
         redirect: '/components/form/default-form',
         name: 'Form',
         meta: {
@@ -36,7 +37,8 @@ const components: AppRouteRecordRaw[] = [
             component: () => import('@/views/components/Form/UseFormDemo.vue'),
             name: 'UseForm',
             meta: {
-              title: 'UseForm'
+              title: 'UseForm',
+              roles: ['admin']
             }
           },
           {
@@ -44,14 +46,15 @@ const components: AppRouteRecordRaw[] = [
             component: () => import('@/views/components/Form/RefForm.vue'),
             name: 'RefForm',
             meta: {
-              title: 'RefForm'
+              title: 'RefForm',
+              roles: ['admin']
             }
           }
         ]
       },
       {
         path: 'table',
-        // component: getParentLayout(),
+        component: getParentLayout(),
         redirect: '/components/table/default-table',
         name: 'TableDemo',
         meta: {
@@ -84,6 +87,14 @@ const components: AppRouteRecordRaw[] = [
             }
           }
         ]
+      },
+      {
+        path: 'input-password',
+        component: () => import('@/views/components/InputPassword/index.vue'),
+        name: 'InputPassword',
+        meta: {
+          title: '密码输入框'
+        }
       },
     ]
   }

@@ -17,7 +17,9 @@ export default defineConfig({
     extend: {
       backgroundColor: {
         // 暗黑背景色
-        'v-dark': `var(--${namespace}-bg-color)` // bg-v-dark
+        'v-dark': `var(--${namespace}-bg-color)`, // bg-v-dark
+        'v-dark-l': 'var(--dark-bg-color)', // bg-v-dark-l
+        'v-dark-ll': 'var(--dark-bg-color-light)', // bg-v-dark-ll
       },
       borderColor: {
         'v-dark': `var(--${namespace}-border-color)` // border-v-dark
