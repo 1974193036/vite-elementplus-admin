@@ -245,7 +245,7 @@ const colorThemePrimary = `bg-[var(--${namespace}-color-primary)]`
   <div
     :class="[
       prefixCls,
-      'fixed top-[45%] right-0 w-40px h-40px text-center leading-40px cursor-pointer',
+      'fixed top-[45%] right-0 z-9999 w-40px h-40px text-center leading-40px cursor-pointer',
       `${colorThemePrimary}`
     ]"
     @click="drawer = true"

@@ -30,9 +30,12 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Footer: typeof import('./../src/components/Footer/src/Footer.vue')['default']
     Form: typeof import('./../src/components/Form/src/Form.vue')['default']
@@ -46,7 +49,11 @@ declare module '@vue/runtime-core' {
     Screenfull: typeof import('./../src/components/Screenfull/src/Screenfull.vue')['default']
     Setting: typeof import('./../src/components/Setting/src/Setting.vue')['default']
     SizeDropdown: typeof import('./../src/components/SizeDropdown/src/SizeDropdown.vue')['default']
+    Table: typeof import('./../src/components/Table/src/Table.vue')['default']
     ThemeSwitch: typeof import('./../src/components/ThemeSwitch/src/ThemeSwitch.vue')['default']
     UserInfo: typeof import('./../src/components/UserInfo/src/UserInfo.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
