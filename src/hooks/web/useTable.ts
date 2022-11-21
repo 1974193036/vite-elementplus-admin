@@ -29,7 +29,7 @@ interface TableObject<T = any> {
   currentRow: Nullable<T>
 }
 
-const { createMessage, createSuccessModal, createConfirm, notification } = useMessage()
+const { createMessage, createConfirm } = useMessage()
 
 export const useTable = <T = any>(config?: UseTableConfig<T>) => {
   const tableObject = reactive<TableObject<T>>({
