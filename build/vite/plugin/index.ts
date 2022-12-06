@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite' // 自动导入组件
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { configMockPlugin } from './mock' // mock
 import { configIconConfig } from './icon'
+import { configEjsPlugin } from './ejs'
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_LEGACY, VITE_USE_MOCK } = viteEnv
@@ -30,6 +31,8 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // icon
   vitePlugins.push(configIconConfig())
+
+  vitePlugins.push(configEjsPlugin(viteEnv))
 
   vitePlugins.push(
     AutoImport({
