@@ -96,6 +96,22 @@ const components: AppRouteRecordRaw[] = [
           title: '密码输入框'
         }
       },
+      {
+        path: 'search',
+        component: () => import('@/views/components/Search/index.vue'),
+        name: 'Search',
+        meta: {
+          title: '查询'
+        }
+      },
+      {
+        path: 'descriptions',
+        component: () => import('@/views/components/Descriptions/index.vue'),
+        name: 'Descriptions',
+        meta: {
+          title: '描述'
+        }
+      },
     ]
   }
 ]
