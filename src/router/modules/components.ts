@@ -120,6 +120,14 @@ const components: AppRouteRecordRaw[] = [
           title: '图片预览'
         }
       },
+      {
+        path: 'dialog',
+        component: () => import('@/views/components/Dialog/index.vue'),
+        name: 'Dialog',
+        meta: {
+          title: '弹窗'
+        }
+      },
     ]
   }
 ]
