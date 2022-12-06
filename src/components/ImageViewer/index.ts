@@ -36,7 +36,7 @@ export function createImageViewer(options: ImageViewerProps) {
 
   const { showImageViewer} = instance!.component!.exposed!
 
-  if (typeof showImageViewer === 'function' && !show) {
+  if (typeof showImageViewer === 'function') {
     showImageViewer()
   }
 }
