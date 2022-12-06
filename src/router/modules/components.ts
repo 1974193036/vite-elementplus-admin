@@ -112,6 +112,14 @@ const components: AppRouteRecordRaw[] = [
           title: '描述'
         }
       },
+      {
+        path: 'image-viewer',
+        component: () => import('@/views/components/ImageViewer/index.vue'),
+        name: 'ImageViewer',
+        meta: {
+          title: '图片预览'
+        }
+      },
     ]
   }
 ]
