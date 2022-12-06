@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { getTableListApi } from '@/api/table'
 import { TableData } from '@/api/table/types'
+import { ContentWrap } from '@/components/ContentWrap';
 
 interface Params {
   pageIndex?: number
@@ -23,7 +24,8 @@ const columns: TableColumn[] = [
   },
   {
     field: 'display_time',
-    label: '创建时间'
+    label: '创建时间',
+    sortable: true
   },
   {
     field: 'importance',
@@ -78,7 +80,13 @@ const actionFn = (data: TableSlotDefault) => {
 
 <template>
   <ContentWrap title="表格" message="基于 ElementPlus 的 Table 组件二次封装">
-    <Table :columns="columns" :data="tableDataList" :loading="loading">
+    <!-- <Table :columns="columns" :data="tableDataList" :loading="loading"> -->
+    <Table
+      :columns="columns"
+      :data="tableDataList"
+      :loading="loading"
+      :defaultSort="{ prop: 'display_time', order: 'descending' }"
+    >
       <template #action="data">
         <ElButton type="primary" @click="actionFn(data as TableSlotDefault)">操作</ElButton>
       </template>
