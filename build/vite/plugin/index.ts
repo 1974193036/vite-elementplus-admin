@@ -9,7 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite' // 自动导入vue全局api
 import Components from 'unplugin-vue-components/vite' // 自动导入组件
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { configMockPlugin } from './mock' // mock
-import { configIconConfig } from './icon'
+import { configIconConfig, configSpriteConfig } from './icon'
 import { configEjsPlugin } from './ejs'
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
@@ -30,7 +30,8 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild))
 
   // icon
-  vitePlugins.push(configIconConfig())
+  vitePlugins.push(configIconConfig()) // Iconify
+  vitePlugins.push(configSpriteConfig()) // 本地svg
 
   vitePlugins.push(configEjsPlugin(viteEnv))
 

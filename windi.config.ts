@@ -15,14 +15,25 @@ export default defineConfig({
   attributify: false,
   theme: {
     extend: {
+      colors: {
+        'v-primary': `var(--${namespace}-color-primary)` // text-v-primary
+      },
       backgroundColor: {
         // 暗黑背景色
         'v-dark': `var(--${namespace}-bg-color)`, // bg-v-dark
         'v-dark-l': 'var(--dark-bg-color)', // bg-v-dark-l
         'v-dark-ll': 'var(--dark-bg-color-light)', // bg-v-dark-ll
+        'v-primary': `var(--${namespace}-color-primary)`, // bg-v-primary
+        'v-primary-light-3': `var(--${namespace}-color-primary-light-3)`, // bg-v-primary-light-3
+        'v-primary-light-5': `var(--${namespace}-color-primary-light-5)`, // bg-v-primary-light-5
+        'v-primary-light-9': `var(--${namespace}-color-primary-light-9)` // bg-v-primary-light-9
       },
       borderColor: {
-        'v-dark': `var(--${namespace}-border-color)` // border-v-dark
+        'v-dark': `var(--${namespace}-border-color)`, // border-v-dark
+        'v-primary': `var(--${namespace}-color-primary)`, // border-v-primary
+        'v-primary-light-3': `var(--${namespace}-color-primary-light-3)`, // border-v-primary-light-3
+        'v-primary-light-5': `var(--${namespace}-color-primary-light-5)`, // border-v-primary-light-5
+        'v-primary-light-9': `var(--${namespace}-color-primary-light-9)`, // border-v-primary-light-9
       }
     }
   },

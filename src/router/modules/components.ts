@@ -128,6 +128,38 @@ const components: AppRouteRecordRaw[] = [
           title: '弹窗'
         }
       },
+      {
+        path: 'icon',
+        component: () => import('@/views/components/Icon/index.vue'),
+        name: 'Icon',
+        meta: {
+          title: '图标'
+        }
+      },
+      {
+        path: 'infotip',
+        component: () => import('@/views/components/Infotip/index.vue'),
+        name: 'Infotip',
+        meta: {
+          title: '信息提示'
+        }
+      },
+      {
+        path: 'highlight',
+        component: () => import('@/views/components/Highlight/index.vue'),
+        name: 'Highlight',
+        meta: {
+          title: '高亮'
+        }
+      },
+      {
+        path: 'count-to',
+        component: () => import('@/views/components/CountTo/index.vue'),
+        name: 'CountTo',
+        meta: {
+          title: '数字动画'
+        }
+      },
     ]
   }
 ]
