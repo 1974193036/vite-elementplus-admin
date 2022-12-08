@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElCollapseTransition: typeof import('element-plus/es')['ElCollapseTransition']
@@ -39,9 +40,12 @@ declare module '@vue/runtime-core' {
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Footer: typeof import('./../src/components/Footer/src/Footer.vue')['default']
     Form: typeof import('./../src/components/Form/src/Form.vue')['default']
@@ -53,6 +57,7 @@ declare module '@vue/runtime-core' {
     InputPassword: typeof import('./../src/components/InputPassword/src/InputPassword.vue')['default']
     InterfaceDisplay: typeof import('./../src/components/Setting/src/components/InterfaceDisplay.vue')['default']
     LayoutRadioPicker: typeof import('./../src/components/Setting/src/components/LayoutRadioPicker.vue')['default']
+    Qrcode: typeof import('./../src/components/Qrcode/src/Qrcode.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Screenfull: typeof import('./../src/components/Screenfull/src/Screenfull.vue')['default']
@@ -62,5 +67,8 @@ declare module '@vue/runtime-core' {
     Table: typeof import('./../src/components/Table/src/Table.vue')['default']
     ThemeSwitch: typeof import('./../src/components/ThemeSwitch/src/ThemeSwitch.vue')['default']
     UserInfo: typeof import('./../src/components/UserInfo/src/UserInfo.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

@@ -83,7 +83,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'axios',
         'qs',
         'element-plus/es/locale/lang/zh-cn',
-        'element-plus/es/locale/lang/en'
+        'element-plus/es/locale/lang/en',
+        'qrcode'
       ]
     }
   }

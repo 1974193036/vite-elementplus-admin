@@ -160,6 +160,14 @@ const components: AppRouteRecordRaw[] = [
           title: '数字动画'
         }
       },
+      {
+        path: 'qrcode',
+        component: () => import('@/views/components/Qrcode/index.vue'),
+        name: 'Qrcode',
+        meta: {
+          title: '二维码'
+        }
+      },
     ]
   }
 ]
