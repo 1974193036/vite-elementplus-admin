@@ -23,6 +23,14 @@ const hooks: AppRouteRecordRaw[] = [
         }
       },
       {
+        path: 'useCopy',
+        component: () => import('@/views/hooks/useCopy.vue'),
+        name: 'UseCopy',
+        meta: {
+          title: 'useCopy'
+        }
+      },
+      {
         path: 'useCrudSchemas',
         component: () => import('@/views/hooks/useCrudSchemas.vue'),
         name: 'UseCrudSchemas',
