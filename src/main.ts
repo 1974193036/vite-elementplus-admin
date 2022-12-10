@@ -15,6 +15,9 @@ import { setupElementPlus } from '@/plugins/elementPlus'
 import router, { setupRouter } from './router'
 import { setupRouterGuard } from './router/guard'
 
+// 自定义指令
+import { setupDirective } from './directives'
+
 import App from './App.vue'
 
 function bootstrap() {
@@ -27,6 +30,8 @@ function bootstrap() {
   setupRouter(app)
 
   setupRouterGuard(router)
+
+  setupDirective(app)
 
   app.mount('#app')
 }

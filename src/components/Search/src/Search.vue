@@ -32,12 +32,24 @@ const props = defineProps({
   model: {
     type: Object as PropType<Recordable>,
     default: () => ({})
-  }
+  },
+  // 默认是展开还是收缩
+  isVisible: propTypes.bool.def(true)
 })
 
 const emit = defineEmits(['search', 'reset'])
 
 const visible = ref(true)
+
+watch(
+  () => props.isVisible,
+  (val) => {
+    visible.value = val
+  },
+  {
+    immediate: true
+  }
+)
 
 const newSchema = computed(() => {
   let schema: FormSchema[] = cloneDeep(props.schema)
@@ -53,7 +65,7 @@ const newSchema = computed(() => {
       {
         field: 'action',
         formItemProps: {
-          labelWidth: '0px',
+          labelWidth: '0px'
           // style: {
           //   justifyContent: 'flex-end'
           // }
@@ -82,6 +94,7 @@ const search = async () => {
     if (isValid) {
       const { getFormData } = methods
       const model = await getFormData()
+      delete model?.action
       emit('search', model)
     }
   })
@@ -91,6 +104,7 @@ const reset = async () => {
   unref(elFormRef)?.resetFields()
   const { getFormData } = methods
   const model = await getFormData()
+  delete model?.action
   emit('reset', model)
 }
 
@@ -105,7 +119,7 @@ const setVisible = () => {
     :is-custom="false"
     :label-width="props.labelWidth"
     hide-required-asterisk
-    :inline="props.inline"
+    :inline="props.isCol ? false : props.inline"
     :is-col="props.isCol"
     :schema="newSchema"
     @register="register"

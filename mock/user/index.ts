@@ -14,6 +14,7 @@ function createFakeUserList() {
       password: '123456',
       token: 'fakeToken1',
       homePath: '/dashboard/analysis',
+      permissions: ['example:dialog:edit', 'example:dialog:view', 'example:dialog:delete'],
       roles: [
         {
           roleName: '超级管理员',
@@ -128,6 +129,7 @@ function createFakeUserList() {
       desc: '测试员～',
       token: 'fakeToken2',
       homePath: '/dashboard/workplace',
+      permissios: ['*.*.*'],
       roles: [
         {
           roleName: '测试员',

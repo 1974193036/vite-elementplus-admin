@@ -49,7 +49,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
       ...(config?.defaultParams || {})
     },
     // 加载中
-    loading: true,
+    loading: false,
     // 当前行的数据
     currentRow: null
   })
@@ -105,7 +105,7 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
   const delData = async (ids: string[] | number[]) => {
     const res = await (config?.delListApi && config?.delListApi(ids))
     if (res) {
-      createMessage.success('请选择需要删除的数据')
+      createMessage.success('删除成功')
 
       // 计算出临界点
       const currentPage =
@@ -145,13 +145,18 @@ export const useTable = <T = any>(config?: UseTableConfig<T>) => {
     },
     // 与Search组件结合
     setSearchParams: (data: Recordable) => {
-      tableObject.currentPage = 1
       tableObject.params = Object.assign(tableObject.params, {
         pageSize: tableObject.pageSize,
         pageIndex: tableObject.currentPage,
         ...data
       })
-      methods.getList()
+      if (tableObject.currentPage == 1) {
+        methods.getList()
+      } else {
+        // 避免重复调用getList方法
+        // 更改currentPage被watch监听到之后，会自动调用 methods.getList()
+        tableObject.currentPage = 1
+      }
     },
     // 删除数据
     delList: async (ids: string[] | number[], multiple: boolean, message = true) => {

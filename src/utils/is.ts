@@ -20,6 +20,10 @@ export const isNumber = (val: unknown): val is number => {
   return is(val, 'Number')
 }
 
+export const isArray = (val: any): val is Array<any> => {
+  return val && Array.isArray(val)
+}
+
 export function isDef<T = unknown>(val?: T): val is T {
   return typeof val !== 'undefined'
 }

@@ -11,7 +11,6 @@ const DEFAULT_CONFIG: TreeHelperConfig = {
 
 const getConfig = (config: Partial<TreeHelperConfig>) => Object.assign({}, DEFAULT_CONFIG, config)
 
-
 export const treeToList = <T = any>(tree: any, config: Partial<TreeHelperConfig> = {}): T => {
   config = getConfig(config)
   const { children } = config
@@ -40,3 +39,80 @@ export const filter = <T = any>(
   }
   return listFilter(tree)
 }
+
+/**
+ * @description: Extract tree specified structure
+ */
+export const treeMap = <T = any>(
+  treeData: T[],
+  opt: { children?: string; conversion: Fn }
+): T[] => {
+  return treeData.map((item) => treeMapEach(item, opt))
+}
+
+/**
+ * @description: Extract tree specified structure
+ */
+export const treeMapEach = (
+  data: any,
+  { children = 'children', conversion }: { children?: string; conversion: Fn }
+) => {
+  const haveChildren = Array.isArray(data[children]) && data[children].length > 0
+  const conversionData = conversion(data) || {}
+  if (haveChildren) {
+    return {
+      ...conversionData,
+      [children]: data[children].map((item: any) =>
+        treeMapEach(item, {
+          children,
+          conversion
+        })
+      )
+    }
+  } else {
+    return {
+      ...conversionData
+    }
+  }
+}
+
+// let x = treeMap(
+//   [{a:1, b: 2}, {a:100, b: 200}],
+//   { conversion: (data) => {data.c = 'new'; return data} }
+// )
+// console.log(x)
+
+// let y = treeMap(
+//   [{a:1, b: 2, children: [{a: 1, b: 2}]}, {a:100, b: 200, children: [{a: 1100, b: 1200}]}],
+//   { conversion: (data) => {data.c = 'new'; return data} }
+// )
+// console.log(y)
+
+/**
+ * 递归遍历树结构
+ * @param treeDatas 树
+ * @param callBack 回调
+ * @param parentNode 父节点
+ */
+export const eachTree = (treeDatas: any[], callBack: Fn, parentNode = {}) => {
+  treeDatas.forEach((element) => {
+    const newNode = callBack(element, parentNode) || element
+    if (element.children) {
+      eachTree(element.children, callBack, newNode)
+    }
+  })
+}
+
+// let treeDatas = [
+//   { a: 1, b: 2, children: [{ a: 1, b: 2 }] },
+//   { a: 100, b: 200, children: [{ a: 100, b: 200 }] }
+// ]
+// eachTree(
+//   treeDatas,
+//   (item, parentNode) => {
+//     item.c = 'new2'
+//     return item
+//   },
+//   {}
+// )
+// console.log(treeDatas)

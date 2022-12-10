@@ -11,7 +11,7 @@ const props = defineProps({
   modelValue: propTypes.bool.def(false),
   title: propTypes.string.def('Dialog'),
   fullscreen: propTypes.bool.def(true),
-  maxHeight: propTypes.oneOfType([String, Number]).def('500px')
+  maxHeight: propTypes.oneOfType([String, Number]).def('450px')
 })
 
 const getBindValue = computed(() => {
@@ -37,7 +37,7 @@ const dialogHeight = ref(isNumber(props.maxHeight) ? `${props.maxHeight}px` : pr
 const dialogStyle = computed(() => {
   // console.log(unref(dialogHeight))
   return {
-    height: unref(dialogHeight)
+    maxHeight: unref(dialogHeight)
   }
 })
 
@@ -82,7 +82,7 @@ watch(
       </div>
     </template>
 
-    <ElScrollbar :style="dialogStyle">
+    <ElScrollbar :max-height="dialogStyle.maxHeight">
       <slot></slot>
     </ElScrollbar>
 

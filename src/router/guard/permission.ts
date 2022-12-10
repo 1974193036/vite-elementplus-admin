@@ -2,9 +2,11 @@ import { resetRouter } from '@/router'
 import { useCache } from '@/hooks/web/useCache'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import { usePermissionStoreWithOut } from '@/store/modules/permission'
+import { useDictStoreWithOut } from '@/store/modules/dict'
 import { useTagsViewStore } from '@/store/modules/tagsView'
 import { useUserStore } from '@/store/modules/user'
 import { getUserInfo } from '@/api/login'
+import { getDictApi } from '@/api/dict'
 import type { RouteRecordRaw } from 'vue-router'
 
 const { wsCache } = useCache()
@@ -17,6 +19,8 @@ const tagsViewStore = useTagsViewStore()
 
 const userStore = useUserStore()
 
+const dictStore = useDictStoreWithOut()
+
 const whiteList = ['/login'] // 不重定向白名单
 
 export function createPermissionGuard(router) {
@@ -25,6 +29,15 @@ export function createPermissionGuard(router) {
       if (to.path === '/login') {
         next({ path: '/' })
       } else {
+        if (!dictStore.getIsSetDict) {
+          // 获取所有字典
+          const res = await getDictApi()
+          if (res) {
+            dictStore.setDictObj(res.data)
+            dictStore.setIsSetDict(true)
+          }
+        }
+
         if (permissionStore.getIsAddRouters) {
           next()
           return

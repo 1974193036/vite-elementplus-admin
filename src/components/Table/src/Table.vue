@@ -267,6 +267,7 @@ export default defineComponent({
             data={unref(getProps).data}
             onSelection-change={selectionChange}
             {...unref(getBindValue)}
+            highlight-current-row
           >
             {{
               default: () => renderTableColumn(),

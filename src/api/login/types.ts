@@ -29,5 +29,7 @@ export interface GetUserInfoModel {
   // 菜单
   menus: [],
   // 主页地址
-  homePath: string
+  homePath: string,
+  // 一些按钮权限
+  permissions: []
 }

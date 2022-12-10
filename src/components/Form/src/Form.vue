@@ -140,7 +140,7 @@ export default defineComponent({
     const renderWrap = () => {
       const { isCol } = unref(getProps)
       const content = isCol ? (
-        <ElRow gutter={20}>{renderFormItemWrap()}</ElRow>
+        <ElRow gutter={40}>{renderFormItemWrap()}</ElRow>
       ) : (
         renderFormItemWrap()
       )

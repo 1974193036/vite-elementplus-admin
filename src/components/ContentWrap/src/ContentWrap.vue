@@ -21,12 +21,12 @@ defineProps({
       ]"
     >
       <div
-        class="pr-12px text-black text-opacity-85 font-weight-600 text-size-20px leading-32px overflow-hidden break-all dark:text-white"
+        class="pr-12px pb-12px text-black text-opacity-85 font-weight-600 text-size-20px leading-32px overflow-hidden break-all dark:text-white"
       >
         {{ title }}
       </div>
       <div
-        class="pt-12px text-black text-opacity-65 text-size-14px leading-normal overflow-hidden break-all dark:text-white"
+        class="text-black text-opacity-65 text-size-14px leading-normal overflow-hidden break-all dark:text-white"
       >
         <template v-if="$slots.message">
           <slot name="message"></slot>

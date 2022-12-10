@@ -39,7 +39,7 @@ const hooks: AppRouteRecordRaw[] = [
         }
       }
     ]
-  },
+  }
 ]
 
 export default hooks

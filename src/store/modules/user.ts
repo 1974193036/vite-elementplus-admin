@@ -8,7 +8,8 @@ export const useUserStore = defineStore('user', {
     realName: '',
     avatar: '',
     desc: '',
-    roles: []
+    roles: [],
+    permissions: [] // 一些按钮权限
   }),
   getters: {
     getUserInfo(): Partial<GetUserInfoModel> {
@@ -17,7 +18,8 @@ export const useUserStore = defineStore('user', {
         realName: this.realName,
         avatar: this.avatar,
         desc: this.desc,
-        roles: this.roles
+        roles: this.roles,
+        permissions: this.permissions
       }
     }
   },
@@ -28,6 +30,7 @@ export const useUserStore = defineStore('user', {
       this.avatar = info.avatar
       this.desc = info.desc
       this.roles = info.roles
+      this.permissions = info.permissions || []
     }
   }
 })

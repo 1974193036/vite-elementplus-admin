@@ -69,7 +69,7 @@ export default [
             id: buildUUID()
           })
         ].concat(List)
-        return resultSuccess(null, '新增成功')
+        return resultSuccess({}, '新增成功')
       } else {
         List.map((item) => {
           if (item.id === body.id) {
@@ -78,7 +78,7 @@ export default [
             }
           }
         })
-        return resultSuccess(null, '修改成功')
+        return resultSuccess({}, '修改成功')
       }
     }
   },
@@ -110,7 +110,7 @@ export default [
             List.splice(i, 1)
           }
         }
-        return resultSuccess(null, '删除成功')
+        return resultSuccess({}, '删除成功')
       }
     }
   }

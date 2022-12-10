@@ -1,18 +1,50 @@
+<script lang="ts">
+export default {
+  name: 'ExamplePage'
+}
+</script>
+
 <script lang="ts" setup>
-import { getDictOneApi } from '@/api/dict'
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
 import { useDictStore } from '@/store/modules/dict'
 import { TableData } from '@/api/table/types'
 import { useTable } from '@/hooks/web/useTable'
 import { getTableListApi, delTableListApi } from '@/api/table'
+import { useRouter } from 'vue-router'
+import { useEmitt } from '@/hooks/web/useEmitt'
+
+const { push } = useRouter()
 
 const dictStore = useDictStore()
+
+useEmitt({
+  name: 'getList',
+  callback: (type: string) => {
+    if (type === 'add') {
+      if (tableObject.currentPage == 1) {
+        getList()
+      } else {
+        // 避免重复调用getList方法
+        // 更改currentPage被watch监听到之后，会自动调用 methods.getList()
+        tableObject.currentPage = 1
+      }
+    } else {
+      getList()
+    }
+  }
+})
 
 const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'index',
     label: '序号',
-    type: 'index'
+    type: 'index',
+    form: {
+      show: false
+    },
+    detail: {
+      show: false
+    }
   },
   {
     field: 'title',
@@ -22,16 +54,45 @@ const crudSchemas = reactive<CrudSchema[]>([
       colProps: {
         span: 8
       }
+    },
+    form: {
+      colProps: {
+        span: 24
+      }
+    },
+    detail: {
+      span: 2
     }
   },
   {
     field: 'author',
-    label: '作者'
+    label: '作者',
+    form: {
+      colProps: {
+        span: 12
+      }
+    },
+    detail: {
+      span: 1
+    }
   },
   {
     field: 'display_time',
     label: '创建时间',
-    width: '220px'
+    width: '220px',
+    form: {
+      component: 'DatePicker',
+      componentProps: {
+        type: 'datetime',
+        valueFormat: 'YYYY-MM-DD HH:mm:ss'
+      },
+      colProps: {
+        span: 12
+      }
+    },
+    detail: {
+      span: 1
+    }
   },
   {
     field: 'importance',
@@ -69,52 +130,77 @@ const crudSchemas = reactive<CrudSchema[]>([
       colProps: {
         span: 8
       }
-    }
-  },
-  {
-    field: 'importance2',
-    label: '重要性2',
-    search: {
-      show: true,
+    },
+    form: {
       component: 'Select',
-      dictName: 'importance',
-      colProps: {
-        span: 8
-      }
-    }
-  },
-  {
-    field: 'importance3',
-    label: '重要性3',
-    search: {
-      show: true,
-      component: 'Select',
-      // @ts-ignore
-      api: async () => {
-        const res = await getDictOneApi()
-        return res.data
+      componentProps: {
+        style: {
+          width: '100%'
+        },
+        options: [
+          {
+            label: '重要',
+            value: 2
+          },
+          {
+            label: '良好',
+            value: 1
+          },
+          {
+            label: '一般',
+            value: 0
+          }
+        ]
       },
       colProps: {
-        span: 8
+        span: 12
       }
+    },
+    detail: {
+      span: 1
     }
   },
   {
     field: 'pageviews',
-    label: '阅读数'
+    label: '阅读数',
+    form: {
+      component: 'InputNumber',
+      value: 0, // 默认值
+      colProps: {
+        span: 12
+      }
+    },
+    detail: {
+      span: 1
+    }
   },
   {
     field: 'content',
     label: '内容',
     table: {
       show: false
+    },
+    form: {
+      component: 'Input', // Editor, 后续再封装 Editor，富文本编辑器
+      colProps: {
+        span: 24
+      }
+    },
+    detail: {
+      span: 2
     }
   },
   {
     field: 'action',
     label: '操作',
     width: '260px',
-    align: 'left'
+    align: 'left',
+    form: {
+      show: false
+    },
+    detail: {
+      show: false
+    }
   }
 ])
 
@@ -124,6 +210,9 @@ const { register, tableObject, methods } = useTable<TableData>({
   response: {
     list: 'list',
     total: 'total'
+  },
+  defaultParams: {
+    title: 's' // 这是一个默认值, 初始化的时候就传入这个参数去查询
   }
 })
 
@@ -152,6 +241,14 @@ const delData = async (row: TableData | null, multiple: boolean) => {
     delLoading.value = false
   })
 }
+
+const AddAction = () => {
+  push('/example/example-add')
+}
+
+const action = (row: TableData, type: string) => {
+  push(`/example/example-${type}?id=${row.id}`)
+}
 </script>
 
 <template>
@@ -163,6 +260,7 @@ const delData = async (row: TableData | null, multiple: boolean) => {
           :is-col="true"
           :is-visible="true"
           :action-col="8"
+          :model="{ title: 's' }"
           expand
           expand-field="importance"
           @search="setSearchParams"
@@ -174,6 +272,7 @@ const delData = async (row: TableData | null, multiple: boolean) => {
     <ContentWrap class="pt-12px">
       <template #message>
         <div class="mb-10px">
+          <ElButton type="primary" @click="AddAction">新增</ElButton>
           <ElButton :loading="delLoading" type="danger" @click="delData(null, true)">删除</ElButton>
         </div>
 
@@ -189,7 +288,27 @@ const delData = async (row: TableData | null, multiple: boolean) => {
           @register="register"
         >
           <template #action="{ row }">
-            <ElButton type="danger" @click="delData(row, false)">删除</ElButton>
+            <ElButton
+              type="primary"
+              v-hasPermi="['example:dialog:edit']"
+              @click="action(row, 'edit')"
+            >
+              编辑
+            </ElButton>
+            <ElButton
+              type="success"
+              v-hasPermi="['example:dialog:view']"
+              @click="action(row, 'detail')"
+            >
+              详情
+            </ElButton>
+            <ElButton
+              type="danger"
+              v-hasPermi="['example:dialog:delete']"
+              @click="delData(row, false)"
+            >
+              删除
+            </ElButton>
           </template>
         </Table>
       </template>
