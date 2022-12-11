@@ -84,7 +84,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'qs',
         'element-plus/es/locale/lang/zh-cn',
         'element-plus/es/locale/lang/en',
-        'qrcode'
+        'qrcode',
+        'echarts',
+        'echarts-wordcloud'
       ]
     }
   }

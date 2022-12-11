@@ -168,6 +168,14 @@ const components: AppRouteRecordRaw[] = [
           title: '二维码'
         }
       },
+      {
+        path: 'echart',
+        component: () => import('@/views/components/Echart/index.vue'),
+        name: 'Echart',
+        meta: {
+          title: '图表'
+        }
+      }
     ]
   }
 ]
